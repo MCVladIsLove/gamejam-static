@@ -7,11 +7,11 @@ public class Window : MonoBehaviour
 {
     [SerializeField] GridPartition _grid;
     [SerializeField] TextMeshPro _text;
-    File _originalFile;
+    FileDisplay _originalFile;
 
     //public GridPartition Grid { get { return _grid; } }
     public string FilePath { get { return _text.text; } }
-    public void DisplayFile(File fileToDisplay)
+    public void DisplayFile(FileDisplay fileToDisplay)
     {
         _originalFile = fileToDisplay;
         Init();
@@ -19,10 +19,10 @@ public class Window : MonoBehaviour
 
     void Init()
     {
-        File createdFile;
+        FileDisplay createdFile;
         _text.text += _originalFile.Text.text + "/";
         int i = 0;
-        foreach (File f in _originalFile.Files)
+        foreach (FileDisplay f in _originalFile.Files)
         {
             createdFile = Instantiate(f);
             _grid.FillCell(i++, createdFile.gameObject);

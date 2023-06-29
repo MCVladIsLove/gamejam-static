@@ -6,10 +6,12 @@ using UnityEngine.Rendering;
 public class DisplayManager : MonoBehaviour
 {
     [SerializeField] Canvas _mainCanvas;
+    [SerializeField] GameObject _fileDisplayed;
     int _topLayer = 3;
 
     public int TopLayer { get { return _topLayer; } set { _topLayer = value; } }
     public Canvas MainCanvas { get { return _mainCanvas; } }
+    public GameObject FileDisplayed { get { return _fileDisplayed; } }
     static public DisplayManager Instance { get; private set; }
 
     private void Awake()
@@ -25,5 +27,6 @@ public class DisplayManager : MonoBehaviour
         obj.GetComponent<SortingGroup>().sortingOrder = ++TopLayer;
         obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, obj.transform.localPosition.z - 1);
     }
+
 
 }

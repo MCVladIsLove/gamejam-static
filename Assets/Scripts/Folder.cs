@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Folder : Window
 {
-    List<File> _files;
+    List<FileDisplay> _files;
     private void Awake()
     {
-        _files = new List<File>();
+        _files = new List<FileDisplay>();
     }
 
 }

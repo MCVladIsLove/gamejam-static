@@ -1,55 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class File : MonoBehaviour
 {
-    [SerializeField] List<File> _files;
-    [SerializeField] string _name;
-    [SerializeField] TextMeshPro _text;
-    [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] Window _openedFolder;
-    string _filePath;
-
-    public TextMeshPro Text { get { return _text; } }
-    public File[] Files { get { return _files.ToArray(); } }
-    public string FileName { get { return _name; } }
-    private void Awake()
+    public File[] GetChildren()
     {
-        _filePath = "";
-        _text.text = _name;
+        File[] nodes = new File[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+            nodes[i] = transform.GetChild(i).GetComponent<File>();
+        return nodes;
     }
 
-    public virtual void Open() 
-    {
-        if (_filePath == "")
-        {
-            GameObject folder = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
-            folder.GetComponent<Window>().DisplayFile(this);
-            DisplayManager.Instance.DisplayOnNextLayer(folder);
-        }
-        else
-        { 
-            GetComponentInParent<Window>().DisplayFile(this);
-        }
-    }
-
-    public void SetFilePath(string path)
-    {
-        _filePath = path;
-    }
-
-    private void OnMouseEnter()
-    {
-        _spriteRenderer.transform.localScale = new Vector3(1.1f, 1.1f, 1);
-    }
-    private void OnMouseExit()
-    {
-        _spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
-    }
-    private void OnMouseUpAsButton()
-    {
-        Open();
-    }
 }
