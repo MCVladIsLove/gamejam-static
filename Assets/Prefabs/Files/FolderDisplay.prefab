@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7050926098765878009}
   - component: {fileID: 4386948484502719684}
   m_Layer: 0
-  m_Name: FileSample
+  m_Name: FolderDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

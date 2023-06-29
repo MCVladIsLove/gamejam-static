@@ -5,28 +5,29 @@ using TMPro;
 
 public class Window : MonoBehaviour
 {
-    [SerializeField] GridPartition _grid;
-    [SerializeField] TextMeshPro _text;
-    FileDisplay _originalFile;
+    [SerializeField] protected GridPartition _grid;
+    [SerializeField] protected TextMeshPro _text;
 
-    //public GridPartition Grid { get { return _grid; } }
+
     public string FilePath { get { return _text.text; } }
-    public void DisplayFile(FileDisplay fileToDisplay)
-    {
-        _originalFile = fileToDisplay;
-        Init();
-    }
 
-    void Init()
+    public virtual void ShowFile(File fileToOpen) { }
+
+    public virtual void Show(File[] files)
     {
         FileDisplay createdFile;
-        _text.text += _originalFile.Text.text + "/";
         int i = 0;
-        foreach (FileDisplay f in _originalFile.Files)
+        foreach (File f in files)
         {
-            createdFile = Instantiate(f);
+            FileSystemManager.Instance.BondFileWindow(f, gameObject);
+            createdFile = Instantiate(f.Display).GetComponent<FileDisplay>();
+            createdFile.SetAssociatedFile(f);
             _grid.FillCell(i++, createdFile.gameObject);
-            createdFile.SetFilePath(_text.text + f.FileName);
+            //createdFile.SetFilePath(f.name);
         }
     }
+    public virtual void Show(File file) { }
+    public virtual void Refresh() { }
+    public virtual void SetPathPrefix(string prefix) { }
+
 }

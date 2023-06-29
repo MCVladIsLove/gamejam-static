@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FileSystemRootNode : MonoBehaviour
 {
-    [SerializeField] DesktopWindow _desktop;
+    [SerializeField] Window _desktop;
 
-    public DesktopWindow Desktop { get { return _desktop; } }
+    public Window Desktop { get { return _desktop; } }
 }

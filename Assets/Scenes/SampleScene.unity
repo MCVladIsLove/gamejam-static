@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 12068478}
+  _text: {fileID: 0}
 --- !u!1001 &134407443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605,7 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCanvas: {fileID: 213358289}
-  _fileDisplayed: {fileID: 5332194306513791979, guid: 4a4b171188ad6864a9d33c24579f9438, type: 3}
+  _folderDisplayed: {fileID: 5332194306513791979, guid: 4a4b171188ad6864a9d33c24579f9438, type: 3}
 --- !u!4 &585390276
 Transform:
   m_ObjectHideFlags: 0

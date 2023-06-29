@@ -5,46 +5,47 @@ using TMPro;
 
 public class FileDisplay : MonoBehaviour
 {
-    [SerializeField] List<FileDisplay> _files;
-    [SerializeField] string _name;
     [SerializeField] TextMeshPro _text;
     [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] Window _openedFolder;
+    [SerializeField] FolderWindow _openedFolder;
     File _file;
-    string _filePath;
 
     public File AssociatedFile { get { return _file; } }
     public TextMeshPro Text { get { return _text; } }
-    public FileDisplay[] Files { get { return _files.ToArray(); } }
-    public string FileName { get { return _name; } }
-    private void Awake()
-    {
-        _filePath = "";
-        _text.text = _name;
-    }
 
     public virtual void Open() 
     {
-        if (_filePath == "")
+        //GameObject window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
+
+        GameObject window;
+        window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
+        window.GetComponent<Window>().ShowFile(_file);
+
+        if (!_file.InRoot)
         {
-            GameObject folder = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
-            folder.GetComponent<Window>().DisplayFile(this);
-            DisplayManager.Instance.DisplayOnNextLayer(folder);
+            Window parent = GetComponentInParent<Window>();
+            Destroy(parent.gameObject);
+            window.GetComponent<Window>().SetPathPrefix(parent.FilePath);
         }
-        else
-        { 
-            GetComponentInParent<Window>().DisplayFile(this);
-        }
+
+        DisplayManager.Instance.DisplayOnNextLayer(window);
+
+        /* if (_filePath == "")
+         {
+             GameObject window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
+             window.GetComponent<Window>().SetOpenedFile(_file);
+             DisplayManager.Instance.DisplayOnNextLayer(window);
+         }
+         else
+         { 
+             GetComponentInParent<Window>().SetOpenedFile(_file);
+         }*/
     }
 
     public void SetAssociatedFile(File file)
     {
         _file = file;
         Refresh();
-    }
-    public void SetFilePath(string path)
-    {
-        _filePath = path;
     }
 
     private void OnMouseEnter()

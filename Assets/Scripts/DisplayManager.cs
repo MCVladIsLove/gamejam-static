@@ -6,12 +6,12 @@ using UnityEngine.Rendering;
 public class DisplayManager : MonoBehaviour
 {
     [SerializeField] Canvas _mainCanvas;
-    [SerializeField] GameObject _fileDisplayed;
+    [SerializeField] GameObject _folderDisplayed;
     int _topLayer = 3;
 
     public int TopLayer { get { return _topLayer; } set { _topLayer = value; } }
     public Canvas MainCanvas { get { return _mainCanvas; } }
-    public GameObject FileDisplayed { get { return _fileDisplayed; } }
+    public GameObject FolderDisplayed { get { return _folderDisplayed; } }
     static public DisplayManager Instance { get; private set; }
 
     private void Awake()
