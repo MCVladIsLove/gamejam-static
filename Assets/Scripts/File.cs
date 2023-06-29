@@ -14,6 +14,7 @@ public class File : MonoBehaviour
 
     public TextMeshPro Text { get { return _text; } }
     public File[] Files { get { return _files.ToArray(); } }
+    public string FileName { get { return _name; } }
     private void Awake()
     {
         _filePath = "";
@@ -29,7 +30,14 @@ public class File : MonoBehaviour
             DisplayManager.Instance.DisplayOnNextLayer(folder);
         }
         else
+        { 
             GetComponentInParent<Window>().DisplayFile(this);
+        }
+    }
+
+    public void SetFilePath(string path)
+    {
+        _filePath = path;
     }
 
     private void OnMouseEnter()

@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 public class DisplayManager : MonoBehaviour
 {
     [SerializeField] Canvas _mainCanvas;
-
     int _topLayer = 3;
 
     public int TopLayer { get { return _topLayer; } set { _topLayer = value; } }
@@ -23,7 +22,7 @@ public class DisplayManager : MonoBehaviour
 
     public void DisplayOnNextLayer(GameObject obj)
     {
-        obj.GetComponent<SortingGroup>().sortingOrder = ++DisplayManager.Instance.TopLayer;
+        obj.GetComponent<SortingGroup>().sortingOrder = ++TopLayer;
         obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, obj.transform.localPosition.z - 1);
     }
 

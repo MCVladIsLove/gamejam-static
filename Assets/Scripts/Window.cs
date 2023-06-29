@@ -19,9 +19,14 @@ public class Window : MonoBehaviour
 
     void Init()
     {
+        File createdFile;
         _text.text += _originalFile.Text.text + "/";
         int i = 0;
         foreach (File f in _originalFile.Files)
-            _grid.FillCell(i++, Instantiate(f).gameObject);
+        {
+            createdFile = Instantiate(f);
+            _grid.FillCell(i++, createdFile.gameObject);
+            createdFile.SetFilePath(_text.text + f.FileName);
+        }
     }
 }
