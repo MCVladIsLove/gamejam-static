@@ -22,6 +22,7 @@ public class FileDisplay : MonoBehaviour
         if (!_file.InRoot)
         {
             Window parent = GetComponentInParent<Window>();
+            window.transform.position = parent.transform.position;
             DisplayManager.Instance.CloseWindow(parent.gameObject);
         }
 

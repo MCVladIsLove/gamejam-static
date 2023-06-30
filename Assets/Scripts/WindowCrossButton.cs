@@ -5,10 +5,11 @@ using UnityEngine;
 public class WindowCrossButton : MonoBehaviour
 {
     [SerializeField] Window _window;
+    [SerializeField] Color _overColor;
 
     private void OnMouseEnter()
     {
-        GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 15);
+        GetComponent<SpriteRenderer>().color = _overColor;
     }
     private void OnMouseExit()
     {
@@ -16,6 +17,6 @@ public class WindowCrossButton : MonoBehaviour
     }
     private void OnMouseUpAsButton()
     {
-        
+        DisplayManager.Instance.CloseWindow(_window.gameObject);
     }
 }

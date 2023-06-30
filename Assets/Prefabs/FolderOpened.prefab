@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: -4171193643863108407}
+  _overColor: {r: 0.41960785, g: 0.22745098, b: 0.02745098, a: 0.24705882}
 --- !u!1 &8267803192611391936
 GameObject:
   m_ObjectHideFlags: 0
