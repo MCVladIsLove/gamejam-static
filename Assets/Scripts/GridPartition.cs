@@ -25,7 +25,7 @@ public class GridPartition : MonoBehaviour
             {
                 Vector3 cellCenter = new Vector3(x * cellWidth + cellWidth / 2, _gridRect.rect.height - y * cellHeight - cellHeight / 2);
                 cell = Instantiate(_cell);
-                cell.name = $"cell {x} {y}";
+                cell.name = $"cell {y} {x}";
                 _cells[x + y * _rows] = cell.GetComponent<GridCell>();
                 _cells[x + y * _rows].Init(transform, scale, cellCenter);
             }
@@ -34,12 +34,11 @@ public class GridPartition : MonoBehaviour
     public void FillCell(int column, int row, GameObject filler)
     {
         if (_cells[column + row * _rows].IsOccupied == false)
-            filler.transform.SetParent(_cells[column + row * _rows].transform);
+            _cells[column + row * _rows].Fill(filler); 
     }
     public void FillCell(int i, GameObject filler)
     {
         if (_cells[i].IsOccupied == false)
-            filler.transform.SetParent(_cells[i].transform, false);
-        _cells[i].IsOccupied = true;
+            _cells[i].Fill(filler);
     }
 }

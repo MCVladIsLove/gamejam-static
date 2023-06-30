@@ -12,11 +12,17 @@ public class GridCell : MonoBehaviour
     {
         _cellRect = GetComponent<RectTransform>();
         _collider = GetComponent<BoxCollider2D>();
-        transform.SetParent(parent);
+        transform.SetParent(parent, false);
         _cellRect.sizeDelta = scale;
         //cellRect.localScale = scale;
         _cellRect.anchoredPosition = centerPosition;
         _collider.size = scale;
         IsOccupied = false;
+    }
+
+    public void Fill(GameObject filler)
+    {
+        filler.transform.SetParent(transform, false);
+        IsOccupied = true;
     }
 }
