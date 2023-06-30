@@ -7,7 +7,6 @@ public class FileDisplay : MonoBehaviour
 {
     [SerializeField] TextMeshPro _text;
     [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] FolderWindow _openedFolder;
     File _file;
 
     public File AssociatedFile { get { return _file; } }
@@ -15,18 +14,10 @@ public class FileDisplay : MonoBehaviour
 
     public virtual void Open() 
     {
-        GameObject window;
-        window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
-        window.GetComponent<Window>().ShowFile(_file);
-
         if (!_file.InRoot)
-        {
-            Window parent = GetComponentInParent<Window>();
-            window.transform.position = parent.transform.position;
-            DisplayManager.Instance.CloseWindow(parent.gameObject);
-        }
-
-        DisplayManager.Instance.DisplayOnNextLayer(window);
+            DisplayManager.Instance.OpenFile(_file, GetComponentInParent<Window>());
+        else
+            DisplayManager.Instance.OpenFile(_file);
     }
 
     public void SetAssociatedFile(File file)

@@ -7,10 +7,13 @@ public class Window : MonoBehaviour
 {
     [SerializeField] protected GridPartition _grid;
     [SerializeField] protected TextMeshPro _text;
+    protected File _originalFile;
 
+    public File OriginaFile { get { return _originalFile; } }
     public string FilePath { get { return _text.text; } }
 
     public virtual void ShowFile(File fileToOpen) { }
+    public virtual void ShowFile(File fileToOpen, Window previousWindow) { }
 
     public virtual void Show(File[] files)
     {

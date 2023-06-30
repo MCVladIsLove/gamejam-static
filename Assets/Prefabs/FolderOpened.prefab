@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: -4171193643863108407}
+  _overColor: {r: 0.22352941, g: 0.41960785, b: 0.02745098, a: 0.24705882}
 --- !u!61 &5517834833713368438
 BoxCollider2D:
   m_ObjectHideFlags: 0

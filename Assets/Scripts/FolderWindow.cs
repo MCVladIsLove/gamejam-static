@@ -6,15 +6,25 @@ using TMPro;
 public class FolderWindow : Window
 {
     // Сделать нормально наследование. Добавить еще один смежный класс FolderTexted или типа того
-    File _originalFile;
 
     //public GridPartition Grid { get { return _grid; } }
     public override void ShowFile(File fileToOpen)
     {
         _originalFile = fileToOpen;
         Show(_originalFile);
+        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
     }
- 
+
+    public override void ShowFile(File fileToOpen, Window previousWindow)
+    {
+        _originalFile = fileToOpen;
+        Show(_originalFile);
+        transform.position = previousWindow.transform.position;
+        DisplayManager.Instance.CloseWindow(previousWindow.gameObject);
+        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+    }
+
+
     public override void Show(File file)
     {
         FileDisplay createdFile;

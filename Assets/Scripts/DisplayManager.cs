@@ -7,6 +7,7 @@ public class DisplayManager : MonoBehaviour
 {
     [SerializeField] Canvas _mainCanvas;
     [SerializeField] GameObject _folderDisplayed;
+    [SerializeField] GameObject _folderOpened;
     int _topLayer = 3;
     Dictionary<GameObject, List<File>> _windowsFiles;
 
@@ -14,6 +15,7 @@ public class DisplayManager : MonoBehaviour
     public int TopLayer { get { return _topLayer; } set { _topLayer = value; } }
     public Canvas MainCanvas { get { return _mainCanvas; } }
     public GameObject FolderDisplayed { get { return _folderDisplayed; } }
+    public GameObject FolderOpened { get { return _folderOpened; } }
     static public DisplayManager Instance { get; private set; }
 
     private void Awake()
@@ -29,7 +31,7 @@ public class DisplayManager : MonoBehaviour
     public void DisplayOnNextLayer(GameObject obj)
     {
         obj.GetComponent<SortingGroup>().sortingOrder = ++TopLayer;
-        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, obj.transform.localPosition.z - TopLayer / 900f);
+        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, obj.transform.localPosition.y, -TopLayer / 900f);
     }
 
     public void BondFileWindow(GameObject window, File file)
@@ -45,5 +47,17 @@ public class DisplayManager : MonoBehaviour
         Destroy(window);
     }
 
+    public void OpenFile(File file, Window containingWindow)
+    {
+        GameObject window;
+        window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
+        window.GetComponent<Window>().ShowFile(file, containingWindow);
+    }
+    public void OpenFile(File file)
+    {
+        GameObject window;
+        window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
+        window.GetComponent<Window>().ShowFile(file);
+    }
 
 }
