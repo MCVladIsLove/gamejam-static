@@ -7,8 +7,7 @@ public class FileSystemManager : MonoBehaviour
 {
     [SerializeField] FileSystemRootNode _fileSystemRoot;
 
-    Dictionary<File, GameObject> _filesWindows;
-    Dictionary<File, GameObject> _filesDisplays;
+   // Dictionary<File, GameObject> _filesDisplays;
 
 
     static public FileSystemManager Instance { get; private set; }
@@ -19,8 +18,6 @@ public class FileSystemManager : MonoBehaviour
             Destroy(this);
         else
             Instance = this;
-
-        _filesWindows = new Dictionary<File, GameObject>();
     }
 
     private void Start()
@@ -32,8 +29,4 @@ public class FileSystemManager : MonoBehaviour
       // DisplayManager.Instance.MainCanvas.transform.GetChild()
     }
 
-    public void BondFileWindow(File file, GameObject window)
-    {
-        _filesWindows.Add(file, window);
-    }
 }

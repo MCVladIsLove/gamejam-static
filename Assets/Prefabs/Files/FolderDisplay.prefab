@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5332194306513791979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5332194306318288832}
@@ -299,10 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec98828a06f3ce4f8c6f98e86d4c719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _files:
-  - {fileID: 8602875760958699328, guid: c9523440528ff234780d40118725a9aa, type: 3}
-  - {fileID: 4611167043341425984, guid: ee1def73f18e7ea43a997df02f7a9c37, type: 3}
-  _name: prikol
   _text: {fileID: 5332194306287296248}
   _spriteRenderer: {fileID: 6801119570586786846}
   _openedFolder: {fileID: -4171193643863108407, guid: 105802560c667be4ba37a68a954b288c, type: 3}

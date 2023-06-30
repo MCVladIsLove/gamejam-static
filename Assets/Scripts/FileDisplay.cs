@@ -15,8 +15,6 @@ public class FileDisplay : MonoBehaviour
 
     public virtual void Open() 
     {
-        //GameObject window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
-
         GameObject window;
         window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
         window.GetComponent<Window>().ShowFile(_file);
@@ -24,22 +22,10 @@ public class FileDisplay : MonoBehaviour
         if (!_file.InRoot)
         {
             Window parent = GetComponentInParent<Window>();
-            Destroy(parent.gameObject);
-            window.GetComponent<Window>().SetPathPrefix(parent.FilePath);
+            DisplayManager.Instance.CloseWindow(parent.gameObject);
         }
 
         DisplayManager.Instance.DisplayOnNextLayer(window);
-
-        /* if (_filePath == "")
-         {
-             GameObject window = Instantiate(_openedFolder.gameObject, DisplayManager.Instance.MainCanvas.transform, true);
-             window.GetComponent<Window>().SetOpenedFile(_file);
-             DisplayManager.Instance.DisplayOnNextLayer(window);
-         }
-         else
-         { 
-             GetComponentInParent<Window>().SetOpenedFile(_file);
-         }*/
     }
 
     public void SetAssociatedFile(File file)
