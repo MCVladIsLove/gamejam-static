@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class File : MonoBehaviour
 {
-    // возможно нужен filepath, чтобы как раз он тут хранился и окошки могли от него обновлять путь в заголовках
     [SerializeField] protected GameObject _display;
     [SerializeField] protected GameObject _fileOpened;
     protected string _filePath;
@@ -13,10 +12,8 @@ public class File : MonoBehaviour
     public GameObject Display { get { return _display; } }
     public GameObject FileOpenedDisplay { get { return _fileOpened; } }
     public bool InRoot { get { return transform.parent.GetComponent<File>() == null; } }
-    private void Awake()
+    protected virtual void Awake()
     {
-        _display = DisplayManager.Instance.FolderDisplayed;
-        _fileOpened = DisplayManager.Instance.FolderOpened;
         UpdateFilePath();
     }
     public File[] GetChildren()
