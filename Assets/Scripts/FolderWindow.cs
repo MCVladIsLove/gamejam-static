@@ -6,6 +6,7 @@ using TMPro;
 public class FolderWindow : Window
 {
     // Сделать нормально наследование. Добавить еще один смежный класс FolderTexted или типа того
+    public override File OriginaFile { get { return _originalFile; } }
 
     //public GridPartition Grid { get { return _grid; } }
     public override void ShowFile(File fileToOpen)
@@ -38,5 +39,9 @@ public class FolderWindow : Window
             _grid.FillCell(i++, createdFile.gameObject);
             //createdFile.SetFilePath(_text.text + f.name);
         }
+    }
+    public override void Redraw()
+    {
+
     }
 }

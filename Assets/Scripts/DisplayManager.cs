@@ -41,6 +41,11 @@ public class DisplayManager : MonoBehaviour
 
         _windowsFiles[window].Add(file);
     }
+    public void TrackWindow(Window window)
+    {
+        _windowsFiles.Add(window.gameObject, new List<File>());
+    }
+
     public void CloseWindow(GameObject window)
     {
         _windowsFiles.Remove(window);
@@ -59,5 +64,81 @@ public class DisplayManager : MonoBehaviour
         window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
         window.GetComponent<Window>().ShowFile(file);
     }
+    public void RedrawWindows(File root)
+    {
+        LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
+        Window window;
 
+        /*if (root.transform.childCount == 0)
+            foreach (var w in _windowsFiles)
+            {
+                window = w.Key.GetComponent<Window>();
+                if (window.OriginaFile == root)
+                    windowsToRedraw.AddLast(window);
+            }
+        else*/
+            foreach (var w in _windowsFiles)
+            {
+                window = w.Key.GetComponent<Window>();
+                if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
+                    windowsToRedraw.AddLast(window);
+            }
+
+
+        foreach (var f in root.GetChildren())
+            RedrawWindow(windowsToRedraw, f);
+    
+        foreach (Window w in windowsToRedraw)
+            OpenFile(w.OriginaFile, w);
+    }
+
+    void RedrawWindow(LinkedList<Window> windowsToRedraw, File root)
+    {
+        Window window;
+
+        if (root.transform.childCount == 0)
+        {
+            foreach (var w in _windowsFiles)
+            {
+                window = w.Key.GetComponent<Window>();
+                if (window.OriginaFile == root)
+                    windowsToRedraw.AddLast(window);
+            }
+        }
+        else
+            foreach (var w in _windowsFiles)
+            {
+                window = w.Key.GetComponent<Window>();
+                if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
+                    if (!windowsToRedraw.Contains(window))
+                        windowsToRedraw.AddLast(window);
+            }
+
+        foreach (var f in root.GetChildren())
+            RedrawWindow(windowsToRedraw, f);
+    }
+    public void DetachFile(File file)
+    {
+        foreach (var w in _windowsFiles)
+        {
+            if (w.Value.Contains(file))
+                _windowsFiles[w.Key].Remove(file);
+        }
+    }
+    public void DetachFileAndRedrawWindow(File file)
+    {
+        LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
+        foreach (var w in _windowsFiles)
+        {
+            if (w.Value.Contains(file))
+            {
+                _windowsFiles[w.Key].Remove(file);
+                Window window = w.Key.GetComponent<Window>();
+                if (window.OriginaFile != null)
+                    windowsToRedraw.AddLast(window);
+            }
+        }
+        foreach (Window w in windowsToRedraw)
+            OpenFile(w.OriginaFile, w);
+    }
 }

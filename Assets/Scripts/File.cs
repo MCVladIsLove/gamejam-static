@@ -9,7 +9,7 @@ public class File : MonoBehaviour
     protected GameObject _fileOpened;
     protected string _filePath;
 
-    public string FilePath { get { return _filePath; } }
+    public string FilePath { get { return _filePath; } set { _filePath = value; } }
     public GameObject Display { get { return _display; } }
     public GameObject FileOpenedDisplay { get { return _fileOpened; } }
     public bool InRoot { get { return transform.parent.GetComponent<File>() == null; } }

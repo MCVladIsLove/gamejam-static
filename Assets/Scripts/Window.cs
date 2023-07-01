@@ -9,9 +9,13 @@ public class Window : MonoBehaviour
     [SerializeField] protected TextMeshPro _text;
     protected File _originalFile;
 
-    public File OriginaFile { get { return _originalFile; } }
+    public virtual File OriginaFile { get { return null; } }
     public string FilePath { get { return _text.text; } }
 
+    protected virtual void Awake()
+    {
+        DisplayManager.Instance.TrackWindow(this);
+    }
     public virtual void ShowFile(File fileToOpen) { }
     public virtual void ShowFile(File fileToOpen, Window previousWindow) { }
 
@@ -29,6 +33,8 @@ public class Window : MonoBehaviour
         }
     }
     public virtual void Show(File file) { }
-    public virtual void Refresh() { }
+    public virtual void Redraw() 
+    {
+    }
 
 }

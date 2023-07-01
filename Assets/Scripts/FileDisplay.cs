@@ -23,7 +23,7 @@ public class FileDisplay : MonoBehaviour
     public void SetAssociatedFile(File file)
     {
         _file = file;
-        Refresh();
+        Redraw();
     }
 
     private void OnMouseEnter()
@@ -39,7 +39,7 @@ public class FileDisplay : MonoBehaviour
         Open();
     }
 
-    void Refresh()
+    void Redraw()
     {
         _text.text = _file.name;
     }

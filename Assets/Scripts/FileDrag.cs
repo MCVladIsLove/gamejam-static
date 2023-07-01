@@ -5,21 +5,23 @@ using UnityEngine;
 public class FileDrag : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _sprite;
+    File _file;
     Vector3 _pointInWindow;
     Vector3 _mousePos;
     bool _isCaptured;
-    GameObject _ghostFile;
+    SpriteRenderer _ghostFile;
 
-    private void Awake()
+    private void Start()
     {
+        _file = gameObject.GetComponent<FileDisplay>().AssociatedFile;
         _isCaptured = false;
     }
 
     private void OnMouseDown()
     {
-        _ghostFile = Instantiate(_sprite.gameObject);
-        _ghostFile.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.4f);
-        _ghostFile.GetComponent<SpriteRenderer>().sortingOrder = DisplayManager.Instance.TopLayer+1;
+        _ghostFile = Instantiate(_sprite);
+        _ghostFile.color = new Color(255, 255, 255, 0.4f);
+        _ghostFile.sortingOrder = DisplayManager.Instance.TopLayer+1;
         _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
         _isCaptured = true;
     }
@@ -37,10 +39,26 @@ public class FileDrag : MonoBehaviour
         Collider2D collider = Physics2D.GetRayIntersection(MainCamera.cam.ScreenPointToRay(Input.mousePosition)).collider;
         if (collider.TryGetComponent<GridCell>(out GridCell cell) && cell.IsOccupied == false)
         {
-            GetComponentInParent<GridCell>().IsOccupied = false;
-            cell.Fill(gameObject);
+            Window window = cell.GetComponentInParent<Window>();
+            if (window.OriginaFile == null || !window.OriginaFile.transform.IsChildOf(_file.transform))   
+            {
+                if (window == gameObject.GetComponentInParent<Window>())
+                {
+                    GetComponentInParent<GridCell>().IsOccupied = false;
+                    cell.Fill(gameObject);
+                }
+                else if (!FileSystemManager.Instance.FileInsideWindow(window, _file))
+                {
+                    GetComponentInParent<GridCell>().IsOccupied = false;
+                    cell.Fill(gameObject);
+                    FileSystemManager.Instance.MoveFileTo(_file, window.OriginaFile);
+                    DisplayManager.Instance.DetachFileAndRedrawWindow(_file);
+                    DisplayManager.Instance.BondFileWindow(window.gameObject, _file);
+                    DisplayManager.Instance.RedrawWindows(_file);
+                }
+            }
         }
-        Destroy(_ghostFile);
+        Destroy(_ghostFile.gameObject);
         _isCaptured = false;
     }
 }
