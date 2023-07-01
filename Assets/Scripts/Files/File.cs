@@ -5,8 +5,8 @@ using UnityEngine;
 public class File : MonoBehaviour
 {
     // возможно нужен filepath, чтобы как раз он тут хранился и окошки могли от него обновлять путь в заголовках
-    protected GameObject _display;
-    protected GameObject _fileOpened;
+    [SerializeField] protected GameObject _display;
+    [SerializeField] protected GameObject _fileOpened;
     protected string _filePath;
 
     public string FilePath { get { return _filePath; } set { _filePath = value; } }
