@@ -69,20 +69,15 @@ public class DisplayManager : MonoBehaviour
         LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
         Window window;
 
-        /*if (root.transform.childCount == 0)
-            foreach (var w in _windowsFiles)
-            {
-                window = w.Key.GetComponent<Window>();
-                if (window.OriginaFile == root)
-                    windowsToRedraw.AddLast(window);
-            }
-        else*/
-            foreach (var w in _windowsFiles)
-            {
-                window = w.Key.GetComponent<Window>();
-                if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
-                    windowsToRedraw.AddLast(window);
-            }
+
+        foreach (var w in _windowsFiles)
+        {
+            window = w.Key.GetComponent<Window>();
+            if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
+                windowsToRedraw.AddLast(window);
+            else if (window.OriginaFile == root)
+                windowsToRedraw.AddLast(window);
+        }
 
 
         foreach (var f in root.GetChildren())

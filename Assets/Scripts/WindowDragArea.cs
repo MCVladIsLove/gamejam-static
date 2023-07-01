@@ -17,6 +17,7 @@ public class WindowDragArea : MonoBehaviour
     private void OnMouseDown()
     {
         _pointInWindow = HelpFunctions.GetMousePosWorld(_window.transform.position.z) - _window.transform.position;
+        DisplayManager.Instance.DisplayOnNextLayer(_window.gameObject);
         _isCaptured = true;
     }
     private void Update()
