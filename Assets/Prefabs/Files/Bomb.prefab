@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _display: {fileID: 1221788794481429858, guid: ef7dcb8e75faa094a9422ee300c2b3ee, type: 3}
   _fileOpened: {fileID: 0}
+  _boomDuration: 2

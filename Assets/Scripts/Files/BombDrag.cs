@@ -19,7 +19,8 @@ public class BombDrag : FileDrag
         _boomAnimator = _ghostFile.GetComponent<Animator>();
         _boomAnimator.enabled = true;
         _ghostFile.sortingOrder = DisplayManager.Instance.TopLayer+1;
-        _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
+        _ghostFile.sortingLayerName = "vfx";
+         _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
         _isCaptured = true;
     }
 
@@ -58,7 +59,7 @@ public class BombDrag : FileDrag
         }
             
         //Destroy(_ghostFile.gameObject, 0.2f);
-        Destroy(_ghostFile.gameObject);
+        Destroy(_ghostFile.gameObject, 0.3f);
         _isCaptured = false;
     }
 
