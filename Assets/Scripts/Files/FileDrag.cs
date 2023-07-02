@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class FileDrag : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer _sprite;
-    File _file;
-    Vector3 _pointInWindow;
-    Vector3 _mousePos;
-    bool _isCaptured;
-    SpriteRenderer _ghostFile;
+    [SerializeField] protected SpriteRenderer _sprite;
+    protected File _file;
+    protected Vector3 _pointInWindow;
+    protected Vector3 _mousePos;
+    protected bool _isCaptured;
+    protected SpriteRenderer _ghostFile;
 
-    private void Start()
+    protected virtual void Start()
     {
         _file = gameObject.GetComponent<FileDisplay>().AssociatedFile;
         _isCaptured = false;
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         _ghostFile = Instantiate(_sprite);
         _ghostFile.color = new Color(255, 255, 255, 0.4f);
@@ -25,7 +25,7 @@ public class FileDrag : MonoBehaviour
         _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
         _isCaptured = true;
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (_isCaptured)
         {
@@ -34,7 +34,7 @@ public class FileDrag : MonoBehaviour
         }
     }
 
-    private void OnMouseUp()
+    protected virtual void OnMouseUp()
     {
         Collider2D collider = Physics2D.GetRayIntersection(MainCamera.cam.ScreenPointToRay(Input.mousePosition)).collider;
         if (collider.TryGetComponent<GridCell>(out GridCell cell) && cell.IsOccupied == false)

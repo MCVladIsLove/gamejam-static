@@ -66,6 +66,13 @@ public class FileSystemManager : MonoBehaviour
             return file.transform.parent.gameObject == window.OriginaFile.gameObject;
         else
             return false;
+    }
 
+    public void DeleteFile(File file, bool immediate)
+    {
+        if (immediate)
+            DestroyImmediate(file.gameObject);
+        else
+            Destroy(file.gameObject);
     }
 }

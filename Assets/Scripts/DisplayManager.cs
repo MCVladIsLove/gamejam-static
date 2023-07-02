@@ -118,7 +118,7 @@ public class DisplayManager : MonoBehaviour
                 _windowsFiles[w.Key].Remove(file);
         }
     }
-    public void DetachFileAndRedrawWindow(File file)
+    public void DetachFileAndRedrawWindow(File file)/////// TUT
     {
         LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
         foreach (var w in _windowsFiles)
@@ -134,5 +134,21 @@ public class DisplayManager : MonoBehaviour
         foreach (Window w in windowsToRedraw)
             w.Redraw();
             //OpenFile(w.OriginaFile, w);
+    }
+
+    public void RedrawOnlyAssociatedWindows(File file)
+    {
+        LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
+        foreach (var w in _windowsFiles)
+        {
+            if (w.Value.Contains(file))
+            {
+                Window window = w.Key.GetComponent<Window>();
+                if (window.OriginaFile != null)
+                    windowsToRedraw.AddLast(window);
+            }
+        }
+        foreach (Window w in windowsToRedraw)
+            w.Redraw();
     }
 }

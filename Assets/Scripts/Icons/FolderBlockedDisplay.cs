@@ -42,8 +42,8 @@ public class FolderBlockedDisplay : FileDisplay
             if (folder.CheckPassword(_passwordField.Text))
             {
                 folder.Unlock();
+                _spriteRenderer.sprite = _unlockedSprite;
                 _passwordField.gameObject.SetActive(false);
-                base.OnMouseUpAsButton();
             }
             else
                 _passwordField.Clear();

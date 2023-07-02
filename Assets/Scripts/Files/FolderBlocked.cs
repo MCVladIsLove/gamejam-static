@@ -21,5 +21,6 @@ public class FolderBlocked : File
     public void Unlock()
     {
         _blocked = false;
+        DisplayManager.Instance.RedrawOnlyAssociatedWindows(this);
     }
 }
