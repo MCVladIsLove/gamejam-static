@@ -20,4 +20,9 @@ public class NotepadWindow : Window
         NotepadFile notepad = (NotepadFile)_originalFile;
         _innerText.text = notepad.InnerText;
     }
+
+    public override void Redraw()
+    {
+        Show(_originalFile);
+    }
 }

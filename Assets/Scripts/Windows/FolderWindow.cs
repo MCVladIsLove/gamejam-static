@@ -42,6 +42,6 @@ public class FolderWindow : Window
     }
     public override void Redraw()
     {
-
+        DisplayManager.Instance.OpenFile(_originalFile, this);
     }
 }

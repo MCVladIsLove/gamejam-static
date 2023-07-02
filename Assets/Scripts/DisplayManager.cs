@@ -78,9 +78,9 @@ public class DisplayManager : MonoBehaviour
 
         foreach (var f in root.GetChildren())
             RedrawWindow(windowsToRedraw, f);
-    
+
         foreach (Window w in windowsToRedraw)
-            OpenFile(w.OriginaFile, w);
+            w.Redraw();// OpenFile(w.OriginaFile, w);
     }
 
     void RedrawWindow(LinkedList<Window> windowsToRedraw, File root)
@@ -97,6 +97,7 @@ public class DisplayManager : MonoBehaviour
             }
         }
         else
+        {
             foreach (var w in _windowsFiles)
             {
                 window = w.Key.GetComponent<Window>();
@@ -104,6 +105,7 @@ public class DisplayManager : MonoBehaviour
                     if (!windowsToRedraw.Contains(window))
                         windowsToRedraw.AddLast(window);
             }
+        }
 
         foreach (var f in root.GetChildren())
             RedrawWindow(windowsToRedraw, f);
@@ -130,6 +132,7 @@ public class DisplayManager : MonoBehaviour
             }
         }
         foreach (Window w in windowsToRedraw)
-            OpenFile(w.OriginaFile, w);
+            w.Redraw();
+            //OpenFile(w.OriginaFile, w);
     }
 }
