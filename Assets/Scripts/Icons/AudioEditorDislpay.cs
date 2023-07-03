@@ -16,6 +16,7 @@ public class AudioEditorDislpay : FileDisplay
         {
             base.OnMouseUpAsButton();
             file.Opened = true;
+            AudioEditorWindow.Instance.RandNoise();
         }
     }
 }
