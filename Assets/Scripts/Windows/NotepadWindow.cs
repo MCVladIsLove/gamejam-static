@@ -11,7 +11,7 @@ public class NotepadWindow : Window
     {
         _originalFile = fileToOpen;
         Show(_originalFile);
-        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+        MoveHigherLayer();
     }
 
     public override void Show(File file)

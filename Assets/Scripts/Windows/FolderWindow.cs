@@ -13,7 +13,7 @@ public class FolderWindow : Window
     {
         _originalFile = fileToOpen;
         Show(_originalFile);
-        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+        MoveHigherLayer();
     }
 
     public override void ShowFile(File fileToOpen, Window previousWindow)
@@ -22,7 +22,7 @@ public class FolderWindow : Window
         Show(_originalFile);
         transform.position = previousWindow.transform.position;
         DisplayManager.Instance.CloseWindow(previousWindow.gameObject);
-        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+        MoveHigherLayer();
     }
 
 

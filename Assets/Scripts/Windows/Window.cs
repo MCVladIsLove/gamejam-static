@@ -37,4 +37,8 @@ public class Window : MonoBehaviour
     {
     }
 
+    public virtual void MoveHigherLayer()
+    {
+        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+    }
 }

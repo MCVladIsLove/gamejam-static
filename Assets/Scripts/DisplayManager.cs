@@ -51,13 +51,15 @@ public class DisplayManager : MonoBehaviour
     public void OpenFile(File file, Window containingWindow)
     {
         GameObject window;
-        window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
+        //window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
+        window = Instantiate(file.FileOpenedDisplay.gameObject);
         window.GetComponent<Window>().ShowFile(file, containingWindow);
     }
     public void OpenFile(File file)
     {
         GameObject window;
-        window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
+        window = Instantiate(file.FileOpenedDisplay.gameObject);
+        //window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
         window.GetComponent<Window>().ShowFile(file);
     }
     public void RedrawWindows(File root)
