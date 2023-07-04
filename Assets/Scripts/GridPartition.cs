@@ -33,8 +33,8 @@ public class GridPartition : MonoBehaviour
 
     public void FillCell(int column, int row, GameObject filler)
     {
-        if (_cells[column + row * _rows].IsOccupied == false)
-            _cells[column + row * _rows].Fill(filler); 
+        if (_cells[column + row * _columns].IsOccupied == false)
+            _cells[column + row * _columns].Fill(filler); 
     }
     public void FillCell(int i, GameObject filler)
     {
@@ -45,5 +45,9 @@ public class GridPartition : MonoBehaviour
     public GridCell GetCell(int i)
     {
         return _cells[i];
+    }
+    public GridCell GetCell(int column, int row)
+    {
+        return _cells[column * _columns + row ];
     }
 }

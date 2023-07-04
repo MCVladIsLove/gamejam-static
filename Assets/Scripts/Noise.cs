@@ -5,6 +5,8 @@ using UnityEngine;
 public class Noise : MonoBehaviour
 {
     [SerializeField] GameObject _noise;
+    [SerializeField] AudioClip _scaryNoise;
+    [SerializeField] Sprite _scaryNoiseSprite;
     float _timePassed;
     bool _playing;
     static public Noise Instance { get; private set; }
@@ -27,7 +29,14 @@ public class Noise : MonoBehaviour
             Instance.Playing = true;
         }
     }
-
+    static public void StartNoise(float maxSecondsDelay, int times, float maxLen, bool checkIfAlreadyPlaying, float delay)
+    {
+        if (checkIfAlreadyPlaying && !Instance.Playing || !checkIfAlreadyPlaying)
+        {
+            Instance.StartCoroutine(Instance.MakeNoise(maxSecondsDelay, times, maxLen, delay));
+            Instance.Playing = true;
+        }
+    }
     IEnumerator MakeNoise(float maxSecondsDelay, int times, float maxLen)
     {
         while (times > 0)
@@ -40,5 +49,28 @@ public class Noise : MonoBehaviour
             times--;
         }
         _playing = false;
+    }
+    IEnumerator MakeNoise(float maxSecondsDelay, int times, float maxLen, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        while (times > 0)
+        {
+            _playing = true;
+            _noise.SetActive(true);
+            yield return new WaitForSeconds(maxLen * Random.value);
+            _noise.SetActive(false);
+            yield return new WaitForSeconds(maxSecondsDelay * Random.value);
+            times--;
+        }
+        _playing = false;
+    }
+
+
+
+    public void ChangeScaryNoise()
+    {
+        _noise.GetComponent<AudioSource>().clip = _scaryNoise;
+        //_noise.GetComponent<SpriteRenderer>().sprite = _scaryNoiseSprite;
     }
 }

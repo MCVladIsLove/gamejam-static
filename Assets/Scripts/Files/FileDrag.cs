@@ -44,12 +44,12 @@ public class FileDrag : MonoBehaviour
             {
                 if (window == gameObject.GetComponentInParent<Window>())
                 {
-                    GetComponentInParent<GridCell>().IsOccupied = false;
+                    GetComponentInParent<GridCell>().Free();
                     cell.Fill(gameObject);
                 }
                 else if (!FileSystemManager.Instance.FileInsideWindow(window, _file))
                 {
-                    GetComponentInParent<GridCell>().IsOccupied = false;
+                    GetComponentInParent<GridCell>().Free();
                     cell.Fill(gameObject);
                     FileSystemManager.Instance.MoveFileTo(_file, window.OriginaFile);
                     DisplayManager.Instance.DetachFileAndRedrawWindow(_file);

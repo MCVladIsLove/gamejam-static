@@ -17,6 +17,7 @@ public class Cat : MonoBehaviour
         Vector2 leftBottomWorld = MainCamera.cam.ScreenToWorldPoint(Vector2.zero);
         _maxLeftDistance = Vector2.Distance(leftBottomWorld, _pupilLeft.transform.position);
         _maxRightDistance = Vector2.Distance(leftBottomWorld, _pupilRight.transform.position);
+        Noise.Instance.ChangeScaryNoise();
     }
 
     void Update()

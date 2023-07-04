@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GridCell : MonoBehaviour
 {
     RectTransform _cellRect;
     BoxCollider2D _collider;
+    public event Action CellOccupied;
+    public event Action CellFreed;
     public bool IsOccupied { get; set; }
 
     public void Init(Transform parent, Vector2 scale, Vector3 centerPosition)
@@ -24,6 +27,7 @@ public class GridCell : MonoBehaviour
     {
         filler.transform.SetParent(transform, false);
         IsOccupied = true;
+        CellOccupied?.Invoke();
     }
     public GameObject Filer { get {
             if (transform.childCount > 0)
@@ -31,4 +35,10 @@ public class GridCell : MonoBehaviour
             else
                 return null;
         } }
+
+    public void Free()
+    {
+        IsOccupied = false;
+        CellFreed?.Invoke();
+    }
 }
