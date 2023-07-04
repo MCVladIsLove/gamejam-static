@@ -57,7 +57,6 @@ public class Arkanoid : FolderWindow
         yield return new WaitForSeconds(2f);
         _ballRb = _ball.GetComponent<Rigidbody2D>();
         _ballRb.velocity = new Vector2(Random.Range(-1, 1), Random.Range(0.3f, 1)) * 3;
-        Win();
     }
 
     public void BlockDestroyed()
