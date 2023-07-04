@@ -152,5 +152,22 @@ public class DisplayManager : MonoBehaviour
         }
         foreach (Window w in windowsToRedraw)
             w.Redraw();
+
+        RedrawDesktopIcons();
     }
+
+    public void RedrawDesktopIcons()
+    {
+        foreach (var w in _windowsFiles)
+        {
+            if (w.Key.name == "Desktop")
+            {
+                Window window = w.Key.GetComponent<Window>();
+                for (int i = 0; i < window.Grid.Capacity; i++)
+                    window.Grid.GetCell(i).Filer?.GetComponent<FileDisplay>().Redraw();
+                break;
+            }
+        }
+    }
+
 }

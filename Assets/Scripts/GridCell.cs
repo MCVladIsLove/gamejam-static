@@ -25,4 +25,10 @@ public class GridCell : MonoBehaviour
         filler.transform.SetParent(transform, false);
         IsOccupied = true;
     }
+    public GameObject Filer { get {
+            if (transform.childCount > 0)
+                return transform.GetChild(0).gameObject;
+            else
+                return null;
+        } }
 }

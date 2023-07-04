@@ -55,6 +55,10 @@ public class FolderBlockedDisplay : FileDisplay
     public override void SetAssociatedFile(File file)
     {
         base.SetAssociatedFile(file);
+    }
+    public override void Redraw()
+    {
+        base.Redraw(); 
         FolderBlocked folder = (FolderBlocked)_file;
         if (folder.Blocked == false)
             _spriteRenderer.sprite = _unlockedSprite;

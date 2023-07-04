@@ -11,7 +11,7 @@ public class FileDisplay : MonoBehaviour
 
     public File AssociatedFile { get { return _file; } }
     public TextMeshPro Text { get { return _text; } }
-
+    public Sprite Sprite { get { return _spriteRenderer.sprite; } }
 
     protected virtual void Awake()
     { }
@@ -42,7 +42,7 @@ public class FileDisplay : MonoBehaviour
         Open();
     }
 
-    protected virtual void Redraw()
+    public virtual void Redraw()
     {
         _text.text = _file.name;
     }

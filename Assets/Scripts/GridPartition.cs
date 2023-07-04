@@ -26,8 +26,8 @@ public class GridPartition : MonoBehaviour
                 Vector3 cellCenter = new Vector3(x * cellWidth + cellWidth / 2, _gridRect.rect.height - y * cellHeight - cellHeight / 2);
                 cell = Instantiate(_cell);
                 cell.name = $"cell {y} {x}";
-                _cells[x + y * _rows] = cell.GetComponent<GridCell>();
-                _cells[x + y * _rows].Init(transform, scale, cellCenter);
+                _cells[x + y * _columns] = cell.GetComponent<GridCell>();
+                _cells[x + _columns * y].Init(transform, scale, cellCenter);
             }
     }
 
@@ -40,5 +40,10 @@ public class GridPartition : MonoBehaviour
     {
         if (_cells[i].IsOccupied == false)
             _cells[i].Fill(filler);
+    }
+
+    public GridCell GetCell(int i)
+    {
+        return _cells[i];
     }
 }

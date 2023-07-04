@@ -29,6 +29,10 @@ public class FolderBoarderDisplay : FileDisplay
     public override void SetAssociatedFile(File file)
     {
         base.SetAssociatedFile(file);
+    }
+    public override void Redraw()
+    {
+        base.Redraw();
         FolderBoarder folder = (FolderBoarder)_file;
         if (folder.Boarder == false)
             _spriteRenderer.sprite = _unlockedSprite;

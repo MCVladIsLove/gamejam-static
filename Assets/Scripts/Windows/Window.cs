@@ -11,6 +11,7 @@ public class Window : MonoBehaviour
 
     public virtual File OriginaFile { get { return null; } }
     public string FilePath { get { return _text.text; } }
+    public GridPartition Grid { get { return _grid; } }
 
     protected virtual void Awake()
     {
