@@ -89,12 +89,12 @@ public class AudioEditorWindow : Window
 
     public void OnNoiseVolumeChanged()
     {
-        _audioSource.volume = Mathf.Abs(_noiseVolume.value * 8 - _desiredNoiseVolume);
+        _audioSource.volume = Mathf.Abs(_noiseVolume.value * 16 - _desiredNoiseVolume);
     }
 
     public void RandNoise()
     {
-        _desiredNoiseVolume = Random.value * 6 + 2;
+        _desiredNoiseVolume = Random.value * 10 + 3;
     }
 
    
