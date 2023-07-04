@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - Plate
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,7 @@ TagManager:
     locked: 0
   - name: vfx
     uniqueID: 3654919511
+    locked: 0
+  - name: Noise
+    uniqueID: 3109549839
     locked: 0
