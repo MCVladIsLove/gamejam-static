@@ -18,5 +18,6 @@ public class WindowCrossButton : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         DisplayManager.Instance.CloseWindow(_window.gameObject);
+        SoundManager.Instance.Play(SoundManager.Instance.FileClose);
     }
 }

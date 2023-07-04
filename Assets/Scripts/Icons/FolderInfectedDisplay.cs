@@ -7,10 +7,11 @@ public class FolderInfectedDisplay : FileDisplay
     [SerializeField] Animator _animator;
     [SerializeField] Sprite _curedSprite;
 
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-        Noise.StartNoise(0.3f, 1, 0.7f, true);
+        FolderInfected folder = (FolderInfected)_file;
+        if (folder.Infected)
+            Noise.StartNoise(0.3f, 1, 0.7f, true);
     }
     protected override void OnMouseEnter()
     {
@@ -26,7 +27,7 @@ public class FolderInfectedDisplay : FileDisplay
             return;
         base.OnMouseUpAsButton();
         if (folder.Infected)
-            Noise.StartNoise(0.3f, 5, 0.3f, true);
+            Noise.StartNoise(0.3f, 3, 0.2f, true);
     }
     public override void Open()
     {        

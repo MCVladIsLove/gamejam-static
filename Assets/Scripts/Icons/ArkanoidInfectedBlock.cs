@@ -26,6 +26,7 @@ public class ArkanoidInfectedBlock : MonoBehaviour
             else
                 Destroy(gameObject);
             arkanoid.BlockDestroyed();
+            SoundManager.Instance.Play(SoundManager.Instance.InfectedArkanoidBlockCollision);
         }
     }
     public void SetHiddenFile(File file)

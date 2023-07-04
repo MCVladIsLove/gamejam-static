@@ -61,6 +61,7 @@ public class BombDrag : FileDrag
         //Destroy(_ghostFile.gameObject, 0.2f);
         Destroy(_ghostFile.gameObject, 0.3f);
         _isCaptured = false;
+        SoundManager.Instance.Play(SoundManager.Instance.BombBang);
     }
 
 }

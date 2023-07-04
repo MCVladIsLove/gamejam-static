@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BombDisplay : FileDisplay
 {
+    protected override void OnMouseUpAsButton()
+    {
+        
+    }
     public override void Open() { }
     
 }

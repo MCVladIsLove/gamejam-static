@@ -22,5 +22,6 @@ public class FolderBlocked : File
     {
         _blocked = false;
         DisplayManager.Instance.RedrawOnlyAssociatedWindows(this);
+        SoundManager.Instance.Play(SoundManager.Instance.UnlockFolder);
     }
 }

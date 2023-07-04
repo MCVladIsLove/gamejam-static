@@ -9,4 +9,11 @@ public class BallArkanoid : MonoBehaviour
         if (gameObject.activeInHierarchy)
             GetComponentInParent<Arkanoid>().Lose();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Plate")
+            SoundManager.Instance.Play(SoundManager.Instance.ArkanoidPlateHit);
+
+    }
 }

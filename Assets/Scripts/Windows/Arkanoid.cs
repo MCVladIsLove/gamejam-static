@@ -46,6 +46,8 @@ public class Arkanoid : FolderWindow
     private void Update()
     {
         _platform.transform.Translate(Vector3.right * Time.deltaTime * _speed * Input.GetAxis("Horizontal"));
+        if (Vector2.Distance(_ball.transform.position, _platform.transform.position) > 15)
+            Lose();
     }
     private void FixedUpdate()
     {
@@ -67,6 +69,7 @@ public class Arkanoid : FolderWindow
             _ball.transform.localScale = Vector3.one * 0.3104244f;
             _ball.GetComponent<CircleCollider2D>().radius = 1.5f;
             _ball.GetComponent<SpriteRenderer>().sprite = _secretSprite;
+            Noise.StartNoise(0.3f, 1, 0.3f, true);
         }
         if (_blocks == 0)
             Win();
@@ -86,6 +89,7 @@ public class Arkanoid : FolderWindow
             DisplayManager.Instance.CloseWindow(gameObject);
 
         Noise.StartNoise(0.3f, 3, 0.4f, true);
+        SoundManager.Instance.Play(SoundManager.Instance.Glitch);
     }
     private void OnDestroy()
     {

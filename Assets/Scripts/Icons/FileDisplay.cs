@@ -40,6 +40,7 @@ public class FileDisplay : MonoBehaviour
     protected virtual void OnMouseUpAsButton()
     {
         Open();
+        SoundManager.Instance.Play(SoundManager.Instance.FileOpen);
     }
 
     public virtual void Redraw()
