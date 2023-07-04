@@ -83,7 +83,7 @@ public class AudioEditorWindow : Window
         if (editor.OpenedAudio != null && !editor.OpenedAudio.Decrypted)
         {
             editor.OpenedAudio.AudioSource.pitch = (-10 + _pitch.value * 20 + editor.OpenedAudio.Shift) * (editor.OpenedAudio.Reversed ? -1 : 1);
-            _audioSource.pitch = -3 + _pitch.value * 6 + editor.OpenedAudio.Shift / 2f;
+            _audioSource.pitch = (-10 + _pitch.value * 20 + editor.OpenedAudio.Shift) * (editor.OpenedAudio.Reversed ? -1 : 1);
         }
     }
 

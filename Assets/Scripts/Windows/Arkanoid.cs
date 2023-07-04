@@ -84,6 +84,8 @@ public class Arkanoid : FolderWindow
             DisplayManager.Instance.OpenFile(parent, GetComponentInParent<Window>());
         else
             DisplayManager.Instance.CloseWindow(gameObject);
+
+        Noise.StartNoise(0.3f, 3, 0.4f, true);
     }
     private void OnDestroy()
     {
