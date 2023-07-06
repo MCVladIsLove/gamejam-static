@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AudioEditorPlayPause : MonoBehaviour
 {
-    bool _playing;
-    [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] Sprite _play;
+    public static bool _playing;
+    public SpriteRenderer _spriteRenderer;
+    public Sprite _play;
     [SerializeField] Sprite _pause;
     [SerializeField] AudioEditorWindow _audioEditor;
+
+    static public AudioEditorPlayPause Instance { get; set; }
     private void Awake()
     {
+        Instance = this;
         _playing = false;
     }
     protected virtual void OnMouseEnter()
