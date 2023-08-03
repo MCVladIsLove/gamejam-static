@@ -120,7 +120,7 @@ public class DisplayManager : MonoBehaviour
                 _windowsFiles[w.Key].Remove(file);
         }
     }
-    public void DetachFileAndRedrawWindow(File file)/////// TUT
+    public void DetachFileAndRedrawWindow(File file)
     {
         LinkedList<Window> windowsToRedraw = new LinkedList<Window>();
         foreach (var w in _windowsFiles)
