@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FolderInfected : File
 {
     [SerializeField] GameObject _changeWhenWin;
     bool _infected;
-
+    [Inject] DisplayManager _displayManager;
     public bool Infected { get { return _infected; } }
 
     protected override void Awake()
@@ -19,6 +20,6 @@ public class FolderInfected : File
     {
         _infected = false;
         _fileOpened = _changeWhenWin;
-        DisplayManager.Instance.RedrawOnlyAssociatedWindows(this);
+        _displayManager.RedrawOnlyAssociatedWindows(this);
     }
 }

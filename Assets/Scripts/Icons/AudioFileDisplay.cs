@@ -14,7 +14,7 @@ public class AudioFileDisplay : FileDisplay
         {
             if (AudioEditorPlayPause._playing)
             {
-                AudioEditor auEditor = (AudioEditor)AudioEditorWindow.Instance.OriginaFile;
+                AudioEditor auEditor = (AudioEditor)AudioEditorWindow.Instance.OriginalFile;
                 auEditor.OpenedAudio.Stop();
                 AudioEditorPlayPause.Instance._spriteRenderer.sprite = AudioEditorPlayPause.Instance._play;
                 AudioEditorWindow.Instance.StopNoise();
@@ -22,7 +22,7 @@ public class AudioFileDisplay : FileDisplay
                 AudioEditorWindow.Instance.RandNoise();
             }
 
-            AudioEditor editor = (AudioEditor)AudioEditorWindow.Instance.OriginaFile;
+            AudioEditor editor = (AudioEditor)AudioEditorWindow.Instance.OriginalFile;
             AudioFile audio = (AudioFile)_file;
             editor.SetAudio(audio);
             AudioEditorWindow.Instance.OnPitchChanged();

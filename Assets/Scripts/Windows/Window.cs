@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Zenject;
 
 public class Window : MonoBehaviour
 {
     [SerializeField] protected GridPartition _grid;
     [SerializeField] protected TextMeshPro _text;
+    
     protected File _originalFile;
 
-    public virtual File OriginaFile { get { return null; } }
+    [Inject] protected DisplayManager _displayManager;
+    [Inject] protected FileIconFactory _fileIconFactory;
+
+    public virtual File OriginalFile { get { return null; } }
     public string FilePath { get { return _text.text; } }
     public GridPartition Grid { get { return _grid; } }
 
     protected virtual void Awake()
     {
-        DisplayManager.Instance.TrackWindow(this);
+        _displayManager.TrackWindow(this);
     }
     public virtual void ShowFile(File fileToOpen) { }
     public virtual void ShowFile(File fileToOpen, Window previousWindow) { }
@@ -26,9 +31,8 @@ public class Window : MonoBehaviour
         int i = 0;
         foreach (File f in files)
         {
-            DisplayManager.Instance.BondFileWindow(gameObject, f);
-            createdFile = Instantiate(f.Display).GetComponent<FileDisplay>();
-            createdFile.SetAssociatedFile(f);
+            _displayManager.BondFileWindow(gameObject, f);
+            createdFile = _fileIconFactory.Create(f);
             _grid.FillCell(i++, createdFile.gameObject);
             //createdFile.SetFilePath(f.name);
         }
@@ -40,6 +44,6 @@ public class Window : MonoBehaviour
 
     public virtual void MoveHigherLayer()
     {
-        DisplayManager.Instance.DisplayOnNextLayer(gameObject);
+        _displayManager.DisplayOnNextLayer(gameObject);
     }
 }

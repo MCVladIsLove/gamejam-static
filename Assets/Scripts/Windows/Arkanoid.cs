@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Arkanoid : FolderWindow
 {
@@ -12,8 +13,9 @@ public class Arkanoid : FolderWindow
     [SerializeField] float _ballSpeed;
     [SerializeField] Sprite _secretSprite;
     Rigidbody2D _ballRb;
+
     static public bool Playing = false;
-    public override File OriginaFile => _originalFile;
+    public override File OriginalFile => _originalFile;
 
     protected override void Awake()
     {
@@ -78,15 +80,15 @@ public class Arkanoid : FolderWindow
     {
         FolderInfected folder = (FolderInfected)_originalFile;
         folder.Cure();
-        DisplayManager.Instance.OpenFile(_originalFile, this);
+        _displayManager.OpenFile(_originalFile, this);
     }
     public void Lose()
     {
-        File parent = OriginaFile.GetParent();
+        File parent = OriginalFile.GetParent();
         if (parent != null)
-            DisplayManager.Instance.OpenFile(parent, GetComponentInParent<Window>());
+            _displayManager.OpenFile(parent, GetComponentInParent<Window>());
         else
-            DisplayManager.Instance.CloseWindow(gameObject);
+            _displayManager.CloseWindow(gameObject);
 
         Noise.StartNoise(0.3f, 3, 0.4f, true);
         SoundManager.Instance.Play(SoundManager.Instance.Glitch);

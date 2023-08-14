@@ -60,10 +60,10 @@ public class FileSystemManager : MonoBehaviour
 
     public bool FileInsideWindow(Window window, File file)
     {
-        if (window.OriginaFile == null && file.InRoot)
+        if (window.OriginalFile == null && file.InRoot)
             return true;
-        else if (window.OriginaFile != null)
-            return file.transform.parent.gameObject == window.OriginaFile.gameObject;
+        else if (window.OriginalFile != null)
+            return file.transform.parent.gameObject == window.OriginalFile.gameObject;
         else
             return false;
     }

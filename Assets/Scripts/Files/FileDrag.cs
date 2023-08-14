@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FileDrag : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class FileDrag : MonoBehaviour
     protected Vector3 _mousePos;
     protected bool _isCaptured;
     protected SpriteRenderer _ghostFile;
+    [Inject] protected DisplayManager _displayManager;
 
     protected virtual void Start()
     {
@@ -21,7 +23,7 @@ public class FileDrag : MonoBehaviour
     {
         _ghostFile = Instantiate(_sprite);
         _ghostFile.color = new Color(255, 255, 255, 0.4f);
-        _ghostFile.sortingOrder = DisplayManager.Instance.TopLayer+1;
+        _ghostFile.sortingOrder = _displayManager.TopLayer+1;
         _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
         _isCaptured = true;
     }
@@ -40,7 +42,7 @@ public class FileDrag : MonoBehaviour
         if (collider.TryGetComponent<GridCell>(out GridCell cell) && cell.IsOccupied == false)
         {
             Window window = cell.GetComponentInParent<Window>();
-            if (window.OriginaFile == null || !window.OriginaFile.transform.IsChildOf(_file.transform))   
+            if (window.OriginalFile == null || !window.OriginalFile.transform.IsChildOf(_file.transform))   
             {
                 if (window == gameObject.GetComponentInParent<Window>())
                 {
@@ -51,10 +53,10 @@ public class FileDrag : MonoBehaviour
                 {
                     GetComponentInParent<GridCell>().Free();
                     cell.Fill(gameObject);
-                    FileSystemManager.Instance.MoveFileTo(_file, window.OriginaFile);
-                    DisplayManager.Instance.DetachFileAndRedrawWindow(_file);
-                    DisplayManager.Instance.BondFileWindow(window.gameObject, _file);
-                    DisplayManager.Instance.RedrawWindows(_file);
+                    FileSystemManager.Instance.MoveFileTo(_file, window.OriginalFile);
+                    _displayManager.DetachFileAndRedrawWindow(_file);
+                    _displayManager.BondFileWindow(window.gameObject, _file);
+                    _displayManager.RedrawWindows(_file);
                 }
             }
         }

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class WindowCrossButton : MonoBehaviour
 {
     [SerializeField] Window _window;
     [SerializeField] Color _overColor;
+    [Inject] private DisplayManager _displayManager;
 
     private void OnMouseEnter()
     {
@@ -17,7 +19,7 @@ public class WindowCrossButton : MonoBehaviour
     }
     private void OnMouseUpAsButton()
     {
-        DisplayManager.Instance.CloseWindow(_window.gameObject);
+        _displayManager.CloseWindow(_window.gameObject);
         SoundManager.Instance.Play(SoundManager.Instance.FileClose);
     }
 }

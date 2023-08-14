@@ -12,6 +12,5 @@ public class FolderManyClicksDisplay : FileDisplay
             base.OnMouseUpAsButton();
         else
             Noise.StartNoise(0.3f, 6, 0.3f, false);
-        // ТУТ БУДЕТ ШАКАЛИТЬ ЭКРАН КРУТО
     }
 }

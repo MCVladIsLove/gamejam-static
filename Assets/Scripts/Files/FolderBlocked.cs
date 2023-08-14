@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FolderBlocked : File
 {
     [SerializeField] string _password;
     bool _blocked;
+    [Inject] DisplayManager _displayManager;
 
     public bool CheckPassword(string pass)
     {
@@ -21,7 +23,7 @@ public class FolderBlocked : File
     public void Unlock()
     {
         _blocked = false;
-        DisplayManager.Instance.RedrawOnlyAssociatedWindows(this);
+        _displayManager.RedrawOnlyAssociatedWindows(this);
         SoundManager.Instance.Play(SoundManager.Instance.UnlockFolder);
     }
 }

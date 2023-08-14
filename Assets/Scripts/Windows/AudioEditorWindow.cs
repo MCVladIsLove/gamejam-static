@@ -21,7 +21,7 @@ public class AudioEditorWindow : Window
         base.Awake();
     }
     static public AudioEditorWindow Instance { get; private set; }
-    public override File OriginaFile { get { return _originalFile; } }
+    public override File OriginalFile { get { return _originalFile; } }
 
     public override void ShowFile(File fileToOpen)
     {
@@ -47,7 +47,7 @@ public class AudioEditorWindow : Window
     public override void MoveHigherLayer()
     {
         base.MoveHigherLayer();
-        _interfaceCanvas.sortingOrder = DisplayManager.Instance.TopLayer;
+        _interfaceCanvas.sortingOrder = _displayManager.TopLayer;
     }
 
     private void OnDestroy()

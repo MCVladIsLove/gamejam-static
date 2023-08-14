@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FolderBoarder : File
 {
     bool _boarder;
+    [Inject] DisplayManager _displayManager;
 
     protected override void Awake()
     {
@@ -15,7 +17,7 @@ public class FolderBoarder : File
     public void Unlock()
     {
         _boarder = false;
-        DisplayManager.Instance.RedrawOnlyAssociatedWindows(this);
+        _displayManager.RedrawOnlyAssociatedWindows(this);
     }
 
 }

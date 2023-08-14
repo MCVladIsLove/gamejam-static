@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Zenject;
 
 public class FileDisplay : MonoBehaviour
 {
     [SerializeField] protected TextMeshPro _text;
     [SerializeField] protected SpriteRenderer _spriteRenderer;
     protected File _file;
+    [Inject] protected DisplayManager _displayManager;
 
     public File AssociatedFile { get { return _file; } }
     public TextMeshPro Text { get { return _text; } }
@@ -18,9 +20,9 @@ public class FileDisplay : MonoBehaviour
     public virtual void Open() 
     {
         if (!_file.InRoot)
-            DisplayManager.Instance.OpenFile(_file, GetComponentInParent<Window>());
+            _displayManager.OpenFile(_file, GetComponentInParent<Window>());
         else
-            DisplayManager.Instance.OpenFile(_file);
+            _displayManager.OpenFile(_file);
     }
 
     public virtual void SetAssociatedFile(File file)

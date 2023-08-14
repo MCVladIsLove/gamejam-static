@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class BombDrag : FileDrag
 {
     Animator _boomAnimator;
     float _timePassed;
     BombFile _bomb;
+
     protected override void Start()
     {
         base.Start();
@@ -18,7 +20,7 @@ public class BombDrag : FileDrag
         _ghostFile = Instantiate(_sprite);
         _boomAnimator = _ghostFile.GetComponent<Animator>();
         _boomAnimator.enabled = true;
-        _ghostFile.sortingOrder = DisplayManager.Instance.TopLayer+1;
+        _ghostFile.sortingOrder = _displayManager.TopLayer+1;
         _ghostFile.sortingLayerName = "vfx";
          _pointInWindow = HelpFunctions.GetMousePosWorld(transform.position.z) - transform.position;
         _isCaptured = true;
@@ -53,7 +55,7 @@ public class BombDrag : FileDrag
                 folder.Unlock();
                 display.SpriteRenderer.sprite = display.UnlockedSprite;
                 FileSystemManager.Instance.DeleteFile(_file, true);
-                DisplayManager.Instance.DetachFileAndRedrawWindow(_file);
+                _displayManager.DetachFileAndRedrawWindow(_file);
                 Destroy(gameObject);
             }
         }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Zenject;
 
 public class DisplayManager : MonoBehaviour
 {
-    [SerializeField] Canvas _mainCanvas;
-    int _topLayer = 3;
-    Dictionary<GameObject, List<File>> _windowsFiles;
+    [Inject] WindowFactory _windowFactory;
+
+    private int _topLayer = 3;
+    private Dictionary<GameObject, List<File>> _windowsFiles;
 
 
     public int TopLayer { get { return _topLayer; } set { _topLayer = value; } }
-    public Canvas MainCanvas { get { return _mainCanvas; } }
     static public DisplayManager Instance { get; private set; }
 
     private void Awake()
@@ -50,17 +51,11 @@ public class DisplayManager : MonoBehaviour
 
     public void OpenFile(File file, Window containingWindow)
     {
-        GameObject window;
-        //window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
-        window = Instantiate(file.FileOpenedDisplay.gameObject);
-        window.GetComponent<Window>().ShowFile(file, containingWindow);
+        _windowFactory.Create(file, Vector3.zero, containingWindow);
     }
     public void OpenFile(File file)
     {
-        GameObject window;
-        window = Instantiate(file.FileOpenedDisplay.gameObject);
-        //window = Instantiate(file.FileOpenedDisplay.gameObject, MainCanvas.transform, true);
-        window.GetComponent<Window>().ShowFile(file);
+        _windowFactory.Create(file, Vector3.zero, null);
     }
     public void RedrawWindows(File root)
     {
@@ -71,9 +66,9 @@ public class DisplayManager : MonoBehaviour
         foreach (var w in _windowsFiles)
         {
             window = w.Key.GetComponent<Window>();
-            if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
+            if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginalFile != null)
                 windowsToRedraw.AddLast(window);
-            else if (window.OriginaFile == root)
+            else if (window.OriginalFile == root)
                 windowsToRedraw.AddLast(window);
         }
 
@@ -94,7 +89,7 @@ public class DisplayManager : MonoBehaviour
             foreach (var w in _windowsFiles)
             {
                 window = w.Key.GetComponent<Window>();
-                if (window.OriginaFile == root)
+                if (window.OriginalFile == root)
                     windowsToRedraw.AddLast(window);
             }
         }
@@ -103,7 +98,7 @@ public class DisplayManager : MonoBehaviour
             foreach (var w in _windowsFiles)
             {
                 window = w.Key.GetComponent<Window>();
-                if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginaFile != null)
+                if (FileSystemManager.Instance.FileInsideWindow(window, root) && window.OriginalFile != null)
                     if (!windowsToRedraw.Contains(window))
                         windowsToRedraw.AddLast(window);
             }
@@ -129,7 +124,7 @@ public class DisplayManager : MonoBehaviour
             {
                 _windowsFiles[w.Key].Remove(file);
                 Window window = w.Key.GetComponent<Window>();
-                if (window.OriginaFile != null)
+                if (window.OriginalFile != null)
                     windowsToRedraw.AddLast(window);
             }
         }
@@ -146,7 +141,7 @@ public class DisplayManager : MonoBehaviour
             if (w.Value.Contains(file))
             {
                 Window window = w.Key.GetComponent<Window>();
-                if (window.OriginaFile != null)
+                if (window.OriginalFile != null)
                     windowsToRedraw.AddLast(window);
             }
         }

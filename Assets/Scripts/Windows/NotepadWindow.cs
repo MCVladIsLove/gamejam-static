@@ -6,7 +6,7 @@ using TMPro;
 public class NotepadWindow : Window
 {
     [SerializeField] TextMeshPro _innerText;
-    public override File OriginaFile => _originalFile;
+    public override File OriginalFile => _originalFile;
     public override void ShowFile(File fileToOpen)
     {
         _originalFile = fileToOpen;

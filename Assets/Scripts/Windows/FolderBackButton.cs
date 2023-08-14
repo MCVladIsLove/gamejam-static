@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FolderBackButton : MonoBehaviour
 {
     [SerializeField] Window _window;
     [SerializeField] Color _overColor;
+    [Inject] private DisplayManager _displayManager;
 
     private void OnMouseEnter()
     {
-        if (_window.OriginaFile.GetParent() != null)
+        if (_window.OriginalFile.GetParent() != null)
             GetComponent<SpriteRenderer>().color = _overColor;
     }
 
@@ -20,8 +22,8 @@ public class FolderBackButton : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        File parent = _window.OriginaFile.GetParent();
+        File parent = _window.OriginalFile.GetParent();
         if (parent != null)
-            DisplayManager.Instance.OpenFile(parent, GetComponentInParent<Window>());
+            _displayManager.OpenFile(parent, GetComponentInParent<Window>());
     }
 }

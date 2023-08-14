@@ -6,7 +6,7 @@ public class AudioEditorDislpay : FileDisplay
 {
     public override void Open()
     {
-        DisplayManager.Instance.OpenFile(_file);
+        _displayManager.OpenFile(_file);
     }
 
     protected override void OnMouseUpAsButton()

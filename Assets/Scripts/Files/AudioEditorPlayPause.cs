@@ -27,7 +27,7 @@ public class AudioEditorPlayPause : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        AudioEditor editorFile = (AudioEditor)_audioEditor.OriginaFile;
+        AudioEditor editorFile = (AudioEditor)_audioEditor.OriginalFile;
         if (editorFile.OpenedAudio != null)
         {
             if (_playing)
