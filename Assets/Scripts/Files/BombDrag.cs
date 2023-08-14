@@ -56,6 +56,7 @@ public class BombDrag : FileDrag
                 display.SpriteRenderer.sprite = display.UnlockedSprite;
                 FileSystemManager.Instance.DeleteFile(_file, true);
                 _displayManager.DetachFileAndRedrawWindow(_file);
+                GetComponentInParent<GridCell>().Free();
                 Destroy(gameObject);
             }
         }
